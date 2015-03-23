@@ -1063,6 +1063,15 @@ static void wechatSendReqDataInit()
     SendReqMessage->base_request = NULL;
     SendReqMessage->data.data = SendDataBuf;
     
+    if(wechatSeq % 3 == 0) 
+    {
+      SendReqMessage->data.len = sizeof(Wristband_Data);
+    }
+    else
+    {
+      SendReqMessage->data.len = sizeof(Wristband_Data)-STEPS_LEN;
+    }
+    /*
     if(wechatSeq >= 6) 
     {
       SendReqMessage->data.len = sizeof(Wristband_Data)-STEPS_LEN;
@@ -1071,7 +1080,7 @@ static void wechatSendReqDataInit()
     {
       SendReqMessage->data.len = sizeof(Wristband_Data);
     }
-    
+    */
     SendReqMessage->has_type = TRUE;
     SendReqMessage->type = EDDT_manufatureSvr;
     
